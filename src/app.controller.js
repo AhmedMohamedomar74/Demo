@@ -42,6 +42,11 @@ async function bootstrap() {
     {
       console.log(`logout from ${socket.id}`)
     })
+
+    io.of("/admin" , (socket)=>
+    {
+      console.log(`admin channel ${socket.id}`)
+    })
   })
 }
 
