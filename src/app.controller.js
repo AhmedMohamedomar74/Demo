@@ -33,20 +33,37 @@ async function bootstrap() {
   io.on("connection", (socket) => {
     console.log(socket.id)
 
-    socket.on("sayHi", (data, callback) => {
-      console.log({ data })
-      callback("Hi from server")
-    })
 
-    socket.on("disconnect" , ()=>
+    socket.on("say-hellow" , (data )=>
     {
-      console.log(`logout from ${socket.id}`)
+      console.log(data)
+      socket.emit("say-back" , {BE :  true})
     })
+    // socket.on("sayHi", (data, callback) => {
+    //   console.log({ data })
+    //   callback("Hi from server")
+    // })
 
-    io.of("/admin" , (socket)=>
-    {
-      console.log(`admin channel ${socket.id}`)
-    })
+    // socket.on("disconnect" , ()=>
+    // {
+    //   console.log(`logout from ${socket.id}`)
+    // })
+
+    // io.of("/admin" , (socket)=>
+    // {
+    //   console.log(`admin channel ${socket.id}`)
+    // })
+
+    // io.emit("emitEvent" , {emit : "done from backend to FE"} ,  (res)=>
+    // {
+    //   console.log({res})
+    // })
+
+    // socket.on("emitEvent" ,  (data , callback)=>
+    
+    // {
+    //   console.log({data})
+    // })
   })
 }
 
