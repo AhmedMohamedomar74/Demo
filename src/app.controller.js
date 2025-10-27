@@ -27,7 +27,6 @@ async function bootstrap() {
   const io = new Server(httpServer, {
     cors: {
       origin: "*", // Configure this properly for production
-      methods: ["GET", "POST"]
     }
   })
 
@@ -37,6 +36,11 @@ async function bootstrap() {
     socket.on("sayHi", (data, callback) => {
       console.log({ data })
       callback("Hi from server")
+    })
+
+    socket.on("disconnect" , ()=>
+    {
+      console.log(`logout from ${socket.id}`)
     })
   })
 }

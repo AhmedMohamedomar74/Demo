@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eshare Books - Frontend</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Include Socket.io client from CDN -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Eshare Books - Frontend</h1>
+        <p class="subtitle">Connecting to remote server</p>
+        
+        <div class="server-config">
+            <label for="serverUrl">Server URL:</label>
+            <input type="text" id="serverUrl" placeholder="http://localhost:3000" value="http://localhost:3000">
+            <button onclick="updateServerUrl()">Update URL</button>
+        </div>
+        
+        <div class="status">
+            <div id="connectionStatus" class="status-disconnected">
+                Disconnected
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="connectBtn" onclick="connectToServer()">Connect to Server</button>
+            <button id="sendBtn" onclick="sendMessage()" disabled>Send "Say Hi"</button>
+            <button id="disconnectBtn" onclick="disconnectFromServer()" disabled>Disconnect</button>
+        </div>
+
+        <div class="messages">
+            <h3>Messages:</h3>
+            <div id="messageLog"></div>
+        </div>
+
+        <div class="connection-info">
+            <p>Server: <span id="currentServerUrl">Not connected</span></p>
+            <p>Socket ID: <span id="socketId">Not connected</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
