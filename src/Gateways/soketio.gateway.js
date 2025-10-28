@@ -4,6 +4,21 @@ import { verify } from "../utils/secuirty/token.services.js"
 let ioServer = null
 const connectedSokets = new Map()
 
+
+const disconnection = (Socket) => {
+    Socket.on("disconnect", () => {
+        const userID = Socket.data.userID
+        if (connectedSokets.has(userID)) {
+            let existingSockets = connectedSokets.get(userID)
+            const findIndex = existingSockets.indexOf(Socket.id)
+
+            existingSockets.splice(findIndex, 1)
+
+            connectedSokets.set(userID, [...existingSockets])
+        }
+    })
+}
+
 const authmiddelware = async (Socket, next) => {
     // console.log()
     const clientToken = Socket.handshake.auth.acessToken
@@ -42,8 +57,11 @@ export const intializer = (httpServer) => {
             console.log(socket.data)
         })
         console.log(connectedSokets)
+
+        disconnection(socket)
     })
 
+    
 
 }
 
